@@ -31,8 +31,15 @@ public class PlayerController : MonoBehaviour
 
     //내부 변수들
     public bool isFirstPerson = true;         //1인칭 모드 인지 여부
-    private bool isGrounded;                   //플레이어가 땅에 있는지 여부
+    //private bool isGrounded;                   //플레이어가 땅에 있는지 여부
     private Rigidbody rb;                      //플레이어의 Rigidbody
+
+    public float falllingThreshold = -0.1f;    // 떨어지는 것으로 간주할 수직 속도 임계값
+
+    [Header("Ground Check Setting")]
+    public float groundCheckDistance = 0.3f;
+    public float slopedLimit = 45f;
+    
 
     void Start()
     {
@@ -45,9 +52,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleJump();
         HandleRotation();
         HandleCameraToggle();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            HandleJump();
+        }
     }
     void FixedUpdate()
     {
@@ -114,14 +125,17 @@ public class PlayerController : MonoBehaviour
         firstPersonCamera.transform.localRotation = Quaternion.identity;                //1인칭 카메라 회전 초기화
     }
 
-    private void OnCollisionStay(Collision collision)
+    //플레이어 점프를 처리하는 함수
+    public void HandleJump()
     {
-        isGrounded = true;     //충돌 중이면 플레이어는 땅에 있다.
+        if (isGrounded())
+        {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);  //위쪽으로 힘을 가해 점프
+        }
     }
 
-
     //플레이어의 이동을 처리하는 함수 
-    void HandleMovement()
+    public void HandleMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");            //좌우 입력 (-1~1)
         float moveVertical = Input.GetAxis("Vertical");                //앞뒤 입력 (1~-1)
@@ -157,16 +171,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
-    //플레이어 점프를 처리하는 함수
-    void HandleJump()
+    public bool isGrounded()    // 땅 체크 확인
     {
-        //점프 버튼을 누르고 땅에 있을때
-        if(Input.GetKeyDown(KeyCode.Space)&& isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);  //위쪽으로 힘을 가해 점프
-            isGrounded = false;
-        }
+        return Physics.Raycast(transform.position, Vector3.down, 2.0f);
     }
-    //플레이어가 땅에 닿아있는지 감지
+
+    public bool isFalling()   //떨어지는 것 확인
+    {
+        return rb.velocity.y < falllingThreshold && !isGrounded();
+    }
+
+    public float GetVerticalVelocity() // 플레이어의 Y축 속도 확인
+    {
+        return rb.velocity.y;
+    }
 }
