@@ -38,11 +38,18 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     //TransitionToState 새로운 상태로 전화하는 메서드
-    public void TransitionToState(PlayerState newstate) 
+    public void TransitionToState(PlayerState newState) 
     {
+
+        //현재 상태와 새로운 상태가 같은 타입일 경우 상태 전화을 하지 않게 한다.
+        if (currentState?.GetType() == newState.GetType())
+        {
+            return;         //같은 타입이면 상태전환을 하지 않고 리턴
+        }
+
         currentState?.Exit();                                           //현재 상태가 존재한다면 [?] If 문 처럼 쓰임 (상태 종료)
-        currentState = newstate;                                        //새로운 상태로 전환
+        currentState = newState;                                        //새로운 상태로 전환
         currentState.Enter();                                           //상태 시작
-        Debug.Log($"Transitioned to State {newstate.GetType().Name}");  //관련 내용 로그로 출력
+        Debug.Log($"Transitioned to State {newState.GetType().Name}");  //관련 내용 로그로 출력
     }
 }
