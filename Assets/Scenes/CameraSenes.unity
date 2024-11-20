@@ -935,7 +935,7 @@ PrefabInstance:
     - target: {fileID: 7101138368095329781, guid: f803b3b7ae3924650a3a78ae0dc358dc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -12.54
       objectReference: {fileID: 0}
     - target: {fileID: 7101138368095329781, guid: f803b3b7ae3924650a3a78ae0dc358dc,
         type: 3}
@@ -1634,7 +1634,7 @@ PrefabInstance:
     - target: {fileID: 2940041139874328687, guid: 99b62088bf00d4bae860fad5ef0297c5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.96
+      value: 10.37
       objectReference: {fileID: 0}
     - target: {fileID: 2940041139874328687, guid: 99b62088bf00d4bae860fad5ef0297c5,
         type: 3}
@@ -1644,7 +1644,7 @@ PrefabInstance:
     - target: {fileID: 2940041139874328687, guid: 99b62088bf00d4bae860fad5ef0297c5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.43
+      value: 19.91
       objectReference: {fileID: 0}
     - target: {fileID: 2940041139874328687, guid: 99b62088bf00d4bae860fad5ef0297c5,
         type: 3}
@@ -2333,6 +2333,7 @@ GameObject:
   - component: {fileID: 1953283373}
   - component: {fileID: 1953283374}
   - component: {fileID: 1953283375}
+  - component: {fileID: 1953283376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2564,6 +2565,25 @@ MonoBehaviour:
   lastPostion: {x: 0, y: 0, z: 0}
   moveThreshold: 0.1
   currentNearbyBuilding: {fileID: 0}
+--- !u!114 &1953283376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953283363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7327be42d86d4c49b4206fc9b0d8fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHunger: 100
+  currentHunger: 0
+  HungerDecreaseRate: 1
+  maxSuitDurability: 100
+  currentSuitDurability: 0
+  havestingDamage: 5
+  craftingDamage: 3
 --- !u!1 &1993792280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,7 +2732,7 @@ PrefabInstance:
     - target: {fileID: 4691441581925644113, guid: 7c1e853eb082e465d9eccd07bac0fbd5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.464136
+      value: 19.79
       objectReference: {fileID: 0}
     - target: {fileID: 4691441581925644113, guid: 7c1e853eb082e465d9eccd07bac0fbd5,
         type: 3}
