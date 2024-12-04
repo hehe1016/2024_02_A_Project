@@ -34,7 +34,7 @@ public class SurvivalStats : MonoBehaviour
         if (isGameOver || isPaused) return;
 
         hungerTimer += Time.deltaTime;
-        if (hungerTimer >= 1.0f) ;       //허기 체크 (1초마다)
+        if (hungerTimer >= 1.0f)       //허기 체크 (1초마다)
         {
             currentHunger = Mathf.Max(0, currentHunger - HungerDecreaseRate);
             hungerTimer = 0.0f;
